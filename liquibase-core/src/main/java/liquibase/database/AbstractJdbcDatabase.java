@@ -866,6 +866,20 @@ public abstract class AbstractJdbcDatabase implements Database {
 
     @Override
     public String escapeObjectName(String catalogName, String schemaName, final String objectName, final Class<? extends DatabaseObject> objectType) {
+    /*
+    	FIXME:
+    	The changeSet: 
+	    	<createSequence
+	            incrementBy="1"
+	            sequenceName="employeeSeq"/>
+
+    	Generates the following SQL output:
+    		CREATE SEQUENCE public."employeeSeq" INCREMENT BY 1;
+    	
+    	Which creates a sequence named: public."employeeSeq"
+    	Instead of: public.employeeSeq
+    */
+    	
 //        CatalogAndSchema catalogAndSchema = this.correctSchema(catalogName, schemaName);
 //        catalogName = catalogAndSchema.getCatalogName();
 //        schemaName = catalogAndSchema.getSchemaName();
